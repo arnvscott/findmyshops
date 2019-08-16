@@ -4,22 +4,35 @@ FROM ubuntu:bionic
 ENV PYTHONUNBUFFERED 1
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
 
 RUN apt-get update -qq && apt-get install -y -qq \
     # std libs
     git less nano curl \
     ca-certificates \
     wget build-essential\
-    # python basic libs
-    python3.6 python3.6-dev gettext \
-    # geodjango
-    gdal-bin binutils libproj-dev libgdal-dev \
-    # postgresql
-    libpq-dev postgresql-client && \
-    apt-get clean all && rm -rf /var/apt/lists/* && rm -rf /var/cache/apt/*
 
-# install pip
-RUN wget https://bootstrap.pypa.io/get-pip.py && python3.6 get-pip.py && rm get-pip.py
-RUN pip3 install --no-cache-dir setuptools wheel -U
+    # get the latest python, pip and virtual environment 
+    python3 python3-pip python3-venv \     
+
+    # geodjango
+    gdal-bin binutils libproj-dev libgdal-dev 
+
+ENV WORKSP_HOME /workspace
+ENV VIRTUAL_ENV ${WORKSP_HOME}/virtualenv
+ENV SOURCE_HOME ${WORKSP_HOME}/src
+
+WORKDIR ${SOURCE_HOME}
+
+# Create virtual environment venv for the application
+RUN python3 -m venv $VIRTUAL_ENV
+
+# Change system path so the virtual environment Python executables get run in
+# preference over the system Python executables 
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+COPY ./requirements.txt .
+RUN pip3 install -r requirements.txt
+
 
 CMD ["/bin/bash"]
