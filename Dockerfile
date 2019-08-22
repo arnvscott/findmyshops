@@ -22,6 +22,9 @@ ENV SOURCE_HOME ${WORKSP_HOME}/src
 
 WORKDIR ${SOURCE_HOME}
 
+# Copy source code into the container
+COPY . .
+
 # Create virtual environment venv for the application
 RUN python3 -m venv $VIRTUAL_ENV
 
@@ -29,7 +32,7 @@ RUN python3 -m venv $VIRTUAL_ENV
 # preference over the system Python executables 
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-COPY ./requirements.txt .
+# Install required python packages
 RUN pip3 install -r requirements.txt
 
 
