@@ -11,10 +11,8 @@ RUN apt-get update -qq && apt-get install -y -qq \
     git less nano curl \
     ca-certificates \
     wget build-essential\
-
     # get the latest python, pip and virtual environment 
     python3 python3-pip python3-venv \     
-
     # geodjango
     gdal-bin binutils libproj-dev libgdal-dev 
 
