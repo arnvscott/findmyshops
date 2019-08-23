@@ -10,11 +10,17 @@ RUN apt-get update -qq && apt-get install -y -qq \
     # std libs
     git less nano curl \
     ca-certificates \
-    wget build-essential\
+    wget unzip build-essential\
     # get the latest python, pip and virtual environment 
     python3 python3-pip python3-venv \     
     # geodjango
     gdal-bin binutils libproj-dev libgdal-dev 
+
+# download and install ngrok
+RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && \
+    unzip ngrok-stable-linux-amd64.zip -d /usr/local/bin && \
+    chmod +x /usr/local/bin/ngrok && \
+    rm ngrok-stable-linux-amd64.zip
 
 ENV WORKSP_HOME /workspace
 ENV VIRTUAL_ENV ${WORKSP_HOME}/virtualenv
