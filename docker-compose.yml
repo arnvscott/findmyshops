@@ -6,3 +6,5 @@ services:
     image: geodjango
     volumes: 
       - .:/workspace/src
+    ports:
+      - "8000:8000"
