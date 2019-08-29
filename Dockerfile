@@ -14,7 +14,9 @@ RUN apt-get update -qq && apt-get install -y -qq \
     # get the latest python, pip and virtual environment 
     python3 python3-pip python3-venv \     
     # geodjango
-    gdal-bin binutils libproj-dev libgdal-dev 
+    gdal-bin binutils libproj-dev libgdal-dev \
+    # install postgresql client (NB. latest postgresql client version on ubuntu is 10, however postgresql server version connecting to on debian Postgresql is 11)
+    postgresql-client
 
 # download and install ngrok
 RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && \
