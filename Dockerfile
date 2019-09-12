@@ -24,6 +24,10 @@ RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && \
     chmod +x /usr/local/bin/ngrok && \
     rm ngrok-stable-linux-amd64.zip
 
+# Add a wait program that will wait for database server to start before application starts
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.2.1/wait /wait
+RUN chmod +x /wait
+
 ENV WORKSP_HOME /workspace
 ENV VIRTUAL_ENV ${WORKSP_HOME}/virtualenv
 ENV SOURCE_HOME ${WORKSP_HOME}/src
