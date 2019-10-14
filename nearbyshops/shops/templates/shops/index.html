@@ -29,11 +29,9 @@
             <div class="row mt-4">
                 <div class="col overflow-auto">
                     <ul class="list-group">
-                        <li class="list-group-item">Gold Coast Airport</li>
-                        <li class="list-group-item">Burleigh Heads Hotel</li>
-                        <li class="list-group-item">Star Casino</li>
-                        <li class="list-group-item">Nobby's Arc</li>
-                        <li class="list-group-item">Sin City </li>
+                        {% for shop in shops %}
+                            <li class="list-group-item">{{shop}}</li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
