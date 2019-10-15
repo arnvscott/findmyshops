@@ -17,16 +17,19 @@
 <body>
     <div class="container">
         <form>
+            {% csrf_token %}
             <div class="row mt-2">
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="latitude eg. 123.456789" id="latitude">
+                    <!-- <input type="text" class="form-control" placeholder="latitude eg. 123.456789" id="latitude"> -->
+                    {{form.latitude}}
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="longitude eg. 123.456789" id="longitude">
+                    <!-- <input type="text" class="form-control" placeholder="longitude eg. 123.456789" id="longitude"> -->
+                    {{form.longitude}}
                 </div>
-            </div>
+            </div> 
             <div class="row mt-4">
                 <div class="col overflow-auto">
                     <ul class="list-group">
