@@ -6,6 +6,8 @@ from shops.forms import AddressForm
 
 from django.contrib.gis.geos import GEOSGeometry
 from django.contrib.gis.db.models.functions import Distance
+from django.contrib.gis.measure import D # ``D`` is a shortcut for ``Distance``
+
 # Create your views here.
 
 def index(request):
@@ -22,8 +24,12 @@ def getaddress(request):
         if form.is_valid():
                 latitude = form.cleaned_data['latitude']
                 longitude = form.cleaned_data['longitude']
+                radius = float(form.cleaned_data['radius'])
                 pnt = GEOSGeometry(f'POINT({latitude} {longitude} )', srid=4326)
-                shops_list = Shop.objects.annotate(distance=Distance('location',pnt)).order_by('distance')
+                if not radius:
+                        shops_list = Shop.objects.annotate(distance=Distance('location',pnt)).order_by('distance')
+                else:
+                        shops_list = Shop.objects.filter(location__distance_lte=(pnt, D(km=radius))).annotate(distance=Distance('location',pnt)).order_by('distance')
                 context = {'shops' : shops_list, 'form' : form}
         return render(request, 'shops/index.html', context)
 
