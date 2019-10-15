@@ -16,7 +16,7 @@
 
 <body>
     <div class="container">
-        <form>
+        <form action="/getaddress/" method="GET">
             {% csrf_token %}
             <div class="row mt-2">
                 <div class="col">
@@ -34,14 +34,14 @@
                 <div class="col overflow-auto">
                     <ul class="list-group">
                         {% for shop in shops %}
-                            <li class="list-group-item">{{shop}}</li>
+                            <li class="list-group-item">{{shop.name}} is {{shop.distance.km}} km away</li>
                         {% endfor %}
                     </ul>
                 </div>
             </div>
             <div class="row mt-5">
                 <div class="col">
-                        <button type="button" class="btn btn-primary btn-lg btn-block fixed-bottom rounded-0">...find events</button>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block fixed-bottom rounded-0">...find events</button>
                 </div>
             </div>
         </form>
