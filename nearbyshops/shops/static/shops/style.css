@@ -8,11 +8,17 @@
     margin: auto;
 }
 
-.button{
+.footer-buttons{
+    position:fixed;
+    bottom:10px;
+    left: 5%;
+    width:90%;
+}
+
+.button {
     background-color: grey;
     color: white;
     font-weight: bolder;
-    margin-top:1em;
     height:3em;
 }
 
