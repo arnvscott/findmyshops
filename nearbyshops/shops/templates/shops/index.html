@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -6,12 +7,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" type="text/css" href="{% static 'shops/style.css' %}">
 
     <title>Venue Search</title>
 </head>
 
 <body>
-    <div>
+    <div class="container">
         <form action="/getaddress/" method="GET">
             {% csrf_token %}
             <div>
@@ -31,7 +33,7 @@
                 </ul>
             </div>
             <div>
-                <button type="submit">...find events</button>
+                <button type="submit" class="wide_input button">...find events</button>
             </div>
         </form>
     </div>
