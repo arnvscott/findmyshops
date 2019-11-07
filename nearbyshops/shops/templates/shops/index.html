@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container"">
         <form action="/getaddress/" method="GET">
             {% csrf_token %}
             <div>
@@ -25,9 +25,9 @@
             <div>
                 {{form.radius}}
             </div>
-            <div id='map'></div>
-            <div class="footer-buttons">
-                <button type="submit" class="wide_input button">...find events</button>
+            <div id="map"></div>
+            <div class="menu-buttons">
+
             </div>
         </form>
     </div>
@@ -36,6 +36,7 @@
         function initMap(){
             map = new google.maps.Map(document.getElementById('map'),{
                 center : {lat: -34.397, lng:150.644},
+                disableDefaultUI: true,
                 zoom:8
             });
         }
