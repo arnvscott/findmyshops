@@ -25,19 +25,22 @@
             <div>
                 {{form.radius}}
             </div>
-            <div>
-                <ul>
-                    {% for shop in shops %}
-                    <li>{{shop.name}} is {{shop.distance.km}} km away</li>
-                    {% endfor %}
-                </ul>
-            </div>
+            <div id='map'></div>
             <div class="footer-buttons">
                 <button type="submit" class="wide_input button">...find events</button>
             </div>
         </form>
     </div>
-
+    <script>
+        var map;
+        function initMap(){
+            map = new google.maps.Map(document.getElementById('map'),{
+                center : {lat: -34.397, lng:150.644},
+                zoom:8
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoWh5wUM_X54Fa2VFyM5qEA2Sj_-Z0cOc&callback=initMap" async defer></script>
 </body>
 
 </html>

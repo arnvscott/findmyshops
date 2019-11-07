@@ -25,3 +25,7 @@
 .wide_input{
     width:100%;
 }
+
+#map {
+    height: 700px;
+}
