@@ -32,7 +32,46 @@
         </form>
     </div>
 
-    <script src="{% static 'shops/main.js'%}"></script>
+    <script>
+        let map;
+        function initMap(){
+            map = new google.maps.Map(document.getElementById('map'),{
+                    center : {lat:-34.397, lng:150.644},
+                    disableDefaultUI: true,
+                    zoom:16
+                });
+
+            infoWindow = new google.maps.InfoWindow;
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position){
+                    var pos = {
+                        lat:position.coords.latitude,
+                        lng:position.coords.longitude
+                    };
+
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent("I am here");
+                    infoWindow.open(map);
+                    map.setCenter(pos);
+                },function(){
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
+            } else {
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+        }
+
+        function handleLocationError(browserHasgeolocation, infoWindow, pos){
+                infoWindow.setPosition(pos);
+                infoWindow.setContent(browserHasgeolocation ?
+                                        'Error : The Geolocation Service has failed.':
+                                        'Error : The broswer does not support geolocation.'
+                                         );
+                infoWindow.open(map)
+
+        }
+    </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoWh5wUM_X54Fa2VFyM5qEA2Sj_-Z0cOc&callback=initMap" async defer></script>
 </body>
 
