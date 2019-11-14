@@ -24,7 +24,7 @@ def getaddress(request):
         if form.is_valid():
                 latitude = form.cleaned_data['latitude']
                 longitude = form.cleaned_data['longitude']
-                radius = float(form.cleaned_data['radius'])
+                radius = form.cleaned_data['radius']
                 pnt = GEOSGeometry(f'POINT({latitude} {longitude} )', srid=4326)
                 if not radius:
                         shops_list = Shop.objects.annotate(distance=Distance('location',pnt)).order_by('distance')
