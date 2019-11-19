@@ -14,7 +14,7 @@
 
 <body>
     <div class="container"">
-        <form action="/changeorigin/" method="GET">
+        <form id="changeorigin" action="/changeorigin/" method="GET">
             {% csrf_token %}
             <div>
                 {{form.latitude}}
@@ -25,11 +25,12 @@
             <div>
                 {{form.radius}}
             </div>
-            <div id="map"></div>
-            <div class="footer-menu-bar">
-                    <button type="submit" class="footer-menu-button"><i class="fas fa-pencil-alt"></i></button>   
-            </div>
         </form>
+        <div id="map"></div>
+        <div class="footer-menu-bar">
+            <button type="submit" form="changeorigin" class="footer-menu-button-left"><i class="fas fa-pencil-alt"></i></button>  
+            <a href="/getlocations/"><button type="button" class="footer-menu-button-right"><i class="fas fa-map-marker-alt"></i></button></a> 
+        </div>
     </div>
 
     <script>

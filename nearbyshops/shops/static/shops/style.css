@@ -27,10 +27,20 @@
     border-top-right-radius: 10px;
 }
 
-.footer-menu-button{
+.footer-menu-button-left{
     color:rgb(202, 195, 195);
     position: absolute;
     left:7vw;
+    top:3vh;
+    font-size:2em;
+    background:none;
+    border:0;
+}
+
+.footer-menu-button-right{
+    color:rgb(202, 195, 195);
+    position: absolute;
+    right:7vw;
     top:3vh;
     font-size:2em;
     background:none;
