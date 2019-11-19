@@ -30,8 +30,8 @@
 .footer-menu-button{
     color:rgb(202, 195, 195);
     position: absolute;
-    right: 30px;
-    top:30%;
+    left:7vw;
+    top:3vh;
     font-size:2em;
     background:none;
     border:0;

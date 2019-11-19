@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
 from shops.models import Shop
-from shops.forms import AddressForm
+from shops.forms import ChangeOriginForm
 
 from django.contrib.gis.geos import GEOSGeometry
 from django.contrib.gis.db.models.functions import Distance
@@ -13,14 +13,14 @@ from django.contrib.gis.measure import D # ``D`` is a shortcut for ``Distance``
 def index(request):
         context = {}
         shops_list = []
-        addressform = AddressForm()
-        context = {'shops' : shops_list, 'form' : addressform}
+        originform = ChangeOriginForm()
+        context = {'shops' : shops_list, 'form' : originform}
         return render(request, 'shops/index.html', context)
 
-def getaddress(request):
+def changeorigin(request):
         context = {}
         shops_list = []
-        form = AddressForm(request.GET)
+        form = ChangeOriginForm(request.GET)
         if form.is_valid():
                 latitude = form.cleaned_data['latitude']
                 longitude = form.cleaned_data['longitude']
