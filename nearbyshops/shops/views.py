@@ -39,7 +39,7 @@ def getlocations(request):
         context = {}
         locations = []
         target_list = []
-        radius = 5
+        radius = 10
         originform = ChangeOriginForm()
         locationform = CurrentLocationForm()
         form = CurrentLocationForm(request.GET)
