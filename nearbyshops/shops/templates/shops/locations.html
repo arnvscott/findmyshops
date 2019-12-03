@@ -14,25 +14,12 @@
 
 <body>
     <div class="container"">
-        <form id="changeorigin" action="/changeorigin/" method="GET">
-            {% csrf_token %}
-            <div>
-                {{origin_form.latitude}}
-            </div>
-            <div>
-                {{origin_form.longitude}}
-            </div>
-            <div>
-                {{origin_form.radius}}
-            </div>
-        </form>
         <form id="getlocations" action="/getlocations/" method="GET">
             {% csrf_token %}
             <div>{{location_form.latitude}} {{location_form.longitude}}</div>
         </form>
         <div id="map"></div>
         <div class="footer-menu-bar">
-            <button type="submit" form="changeorigin" class="footer-menu-button-left"><i class="fas fa-pencil-alt"></i></button>  
             <button type="submit" form="getlocations" class="footer-menu-button-right"><i class="fas fa-map-marker-alt"></i></button>
         </div>
     </div>
