@@ -1,0 +1,17 @@
+{% load static %}
+
+<body>
+    <div class="container"">
+        <form id="getlocations" action="/getlocations/" method="GET">
+            {% csrf_token %}
+            <div>
+                {{location_form.latitude}} {{location_form.longitude}}
+            </div>
+        </form>
+        <div id="map"></div>
+        <div class="footer-menu-bar">
+            <button type="submit" form="getlocations" class="footer-menu-button-right"><i class="fas fa-map-marker-alt"></i></button>
+        </div>
+    </div>
+</body>
+    

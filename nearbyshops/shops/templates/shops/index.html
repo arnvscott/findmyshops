@@ -2,29 +2,9 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="stylesheet" type="text/css" href="{% static 'shops/style.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'shops/fontawesome/css/all.css' %}">
-    <title>Venue Search</title>
-</head>
+    {% include "shops/head.html" %}
 
-<body>
-    <div class="container"">
-        <form id="getlocations" action="/getlocations/" method="GET">
-            {% csrf_token %}
-            <div>
-                {{location_form.latitude}} {{location_form.longitude}}
-            </div>
-        </form>
-        <div id="map"></div>
-        <div class="footer-menu-bar">
-            <button type="submit" form="getlocations" class="footer-menu-button-right"><i class="fas fa-map-marker-alt"></i></button>
-        </div>
-    </div>
+    {% include "shops/body.html" %}
 
     <script>
         let map;
@@ -66,12 +46,11 @@
                 infoWindow.setContent(browserHasgeolocation ?
                                         'Error : The Geolocation Service has failed.':
                                         'Error : The broswer does not support geolocation.'
-                                         );
+                                            );
                 infoWindow.open(map)
 
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoWh5wUM_X54Fa2VFyM5qEA2Sj_-Z0cOc&callback=initMap" async defer></script>
-</body>
 
 </html>
