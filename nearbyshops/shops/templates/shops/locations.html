@@ -6,8 +6,9 @@
 
     {% include "shops/body.html" %}
 
+    <script src="{% static 'shops/main.js' %}"></script>
 
-    <script>
+   <script>
         let map;
         function initMap(){
             map = new google.maps.Map(document.getElementById('map'),{
@@ -16,8 +17,6 @@
                     zoom:12
                 });
 
-            infoWindow = new google.maps.InfoWindow;
-
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position){
                     var pos = {
@@ -25,26 +24,15 @@
                         lng:position.coords.longitude
                     };
 
-                    infoWindow.setPosition(pos);
-                    infoWindow.setContent("I am here");
-                    infoWindow.open(map);
-                    map.setCenter(pos);
+                    // set a message at the coordinates
+                    setInfoWindow(map, pos, 'I am here');
 
-                    // set the current coordinate position fields to the current latitude and longitude
-                    document.getElementById("cur_lat").value = pos.lat;
-                    document.getElementById("cur_lng").value = pos.lng;
+                    // record the latitude and longitudes of the current position in the hidden form field
+                    setLatLngFormFields(pos.lat, pos.lng);
 
-                    //set the markers for the located sites
-                    var locations = {{locations|safe}};
-
-                    // create markers
-                    var markers = locations.map(function(location){
-                        pos = {
-                            lat:location.lat,
-                            lng:location.lng
-                        };
-                        return new google.maps.Marker({position:pos, map: map, label:location.name });
-                    });
+                    //mark the locations found on the map
+                    var locations = JSON.parse('{{ locations|safe }}');
+                    markLocations(map, locations);
 
                 },function(){
                     handleLocationError(true, infoWindow, map.getCenter());
@@ -64,6 +52,8 @@
 
         }
     </script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoWh5wUM_X54Fa2VFyM5qEA2Sj_-Z0cOc&callback=initMap" async defer></script>
+
 
 </html>

@@ -7,7 +7,9 @@ from shops.forms import CurrentLocationForm
 from django.contrib.gis.geos import GEOSGeometry
 from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.measure import D # ``D`` is a shortcut for ``Distance``
- 
+
+import json
+
 # Create your views here.
 
 def index(request):
@@ -32,7 +34,7 @@ def getlocations(request):
                 target_list = [{'name':site.name,'lat':site.location.x, 'lng':site.location.y} for site in locations]
                 print (target_list)
         
-        context = {'locations':target_list, 'location_form':locationform}
+        context = {'locations':json.dumps(target_list), 'location_form':locationform}
         return render(request, 'shops/locations.html', context)
 
 

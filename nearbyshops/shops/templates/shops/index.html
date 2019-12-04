@@ -6,51 +6,50 @@
 
     {% include "shops/body.html" %}
 
-    <script>
-        let map;
-        function initMap(){
-            map = new google.maps.Map(document.getElementById('map'),{
-                    center : {lat:-34.397, lng:150.644},
-                    disableDefaultUI: true,
-                    zoom:13
-                });
+   <script src="{% static 'shops/main.js' %}"></script> 
 
-            infoWindow = new google.maps.InfoWindow;
+  <script>  
+    var map;
+    function initMap(){
+        map = new google.maps.Map(document.getElementById('map'),{
+                center : {lat:-34.397, lng:150.644},
+                disableDefaultUI: true,
+                zoom:13
+            });
+        
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position){
+                var pos = {
+                    lat:position.coords.latitude,
+                    lng:position.coords.longitude
+                };
+    
+                // set a message at the coordinates
+                setInfoWindow(map, pos, 'I am here');
 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position){
-                    var pos = {
-                        lat:position.coords.latitude,
-                        lng:position.coords.longitude
-                    };
+                // record the latitude and longitudes of the current position in the hidden form field
+                setLatLngFormFields(pos.lat, pos.lng);
 
-                    infoWindow.setPosition(pos);
-                    infoWindow.setContent("I am here");
-                    infoWindow.open(map);
-                    map.setCenter(pos);
-
-                    // set the current coordinate position fields to the current latitude and longitude
-                    document.getElementById("cur_lat").value = pos.lat;
-                    document.getElementById("cur_lng").value = pos.lng;
-
-                },function(){
-                    handleLocationError(true, infoWindow, map.getCenter());
-                });
-            } else {
-                handleLocationError(false, infoWindow, map.getCenter());
-            }
+            },function(){
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+        } else {
+            handleLocationError(false, infoWindow, map.getCenter());
         }
-
-        function handleLocationError(browserHasgeolocation, infoWindow, pos){
-                infoWindow.setPosition(pos);
-                infoWindow.setContent(browserHasgeolocation ?
-                                        'Error : The Geolocation Service has failed.':
-                                        'Error : The broswer does not support geolocation.'
-                                            );
-                infoWindow.open(map)
-
-        }
-    </script>
+    }
+    
+    function handleLocationError(browserHasgeolocation, infoWindow, pos){
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(browserHasgeolocation ?
+                                    'Error : The Geolocation Service has failed.':
+                                    'Error : The broswer does not support geolocation.'
+                                        );
+            infoWindow.open(map)
+    
+    }
+</script>
+        
+    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoWh5wUM_X54Fa2VFyM5qEA2Sj_-Z0cOc&callback=initMap" async defer></script>
 
 </html>
